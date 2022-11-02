@@ -9,7 +9,7 @@ function NavBar() {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row justify-between px-2 py-2 ">
+    <div className="flex flex-col sm:flex-row justify-between px-2 py-2 shadow-md bg-transparent">
       <div className="font-bold flex justify-between">
         <div>Logo</div>
         <div className="visible sm:hidden cursor-pointer" onClick={toggleMenu}>
