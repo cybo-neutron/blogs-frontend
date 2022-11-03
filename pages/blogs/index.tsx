@@ -7,7 +7,9 @@ export default function Blogs(props: any) {
   return (
     <>
       <NavBar />
-
+      <button>
+        <Link href="/blogs/create">Create</Link>
+      </button>
       {props.data.map((elem) => {
         return (
           <Link

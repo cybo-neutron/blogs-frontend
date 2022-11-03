@@ -1,16 +1,21 @@
+import Router, { useRouter } from "next/router";
 import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 
 const HorizontalCard = (props: any) => {
   const { tags, id } = props;
+  const router = useRouter();
 
   async function handleDelete(event: React.MouseEvent) {
     event.preventDefault();
-    const response = await fetch(`http://localhost:5000/api/posts/${id}`, {
-      method: "DELETE",
-    });
-    const json = await response.json();
-    console.log(json);
+    //todo : confirm dialog for delete
+    const confirmDelete = window.confirm("Are you sure you want to delete it?");
+    if (confirmDelete) {
+      const response = await fetch(`http://localhost:5000/api/posts/${id}`, {
+        method: "DELETE",
+      });
+      router.push("/blogs");
+    }
   }
 
   return (
@@ -34,7 +39,9 @@ const HorizontalCard = (props: any) => {
         <div className="flex flex-row mt-auto space-x-2">
           {tags.map((elem) => {
             return (
-              <p className="bg-zinc-700 px-2 rounded-full text-sm">#{elem}</p>
+              <p className="bg-zinc-700 px-2 rounded-full text-sm" key={elem}>
+                #{elem}
+              </p>
             );
           })}
         </div>

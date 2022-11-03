@@ -35,9 +35,11 @@ function Blog(props) {
   return (
     <>
       <NavBar />
-      <h1 className="text-xl font-bold">{blogData.title}</h1>
+      <div className="p-5">
+        <h1 className="text-3xl font-bold mb-3">{blogData.title}</h1>
 
-      <p>{blogData.description}</p>
+        <p>{blogData.description}</p>
+      </div>
     </>
   );
 }
