@@ -1,6 +1,9 @@
 import Router, { useRouter } from "next/router";
 import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
+import { FiEdit } from "react-icons/fi";
+import ReactMarkdown from "react-markdown";
+import style from "./HorizontalCard.module.css";
 
 const HorizontalCard = (props: any) => {
   const { tags, id } = props;
@@ -18,6 +21,17 @@ const HorizontalCard = (props: any) => {
     }
   }
 
+  async function handleEdit(event: React.MouseEvent) {
+    event.preventDefault();
+    console.log("Editting");
+    router.push({
+      pathname: "/blogs/edit",
+      query: {
+        id,
+      },
+    });
+  }
+
   return (
     <div
       className="flex  overflow-hidden bg-zinc-800 my-2 rounded-md mx-2 cursor-pointer shadow-xl"
@@ -33,9 +47,16 @@ const HorizontalCard = (props: any) => {
 
         <h2 className="text-xl font-bold">{props.title || "No title"}</h2>
 
-        <p className="text-sm text-zinc-300 mt-2 line-clamp-2 sm:line-clamp-3">
-          {props.description || "No description"}
-        </p>
+        <article className={style.reactMarkDown}>
+          <ReactMarkdown
+            className={
+              // style.reactMarkDown
+              `text-sm text-zinc-300 mt-2 line-clamp-3 w-full`
+            }
+          >
+            {props.description || "No description"}
+          </ReactMarkdown>
+        </article>
         <div className="flex flex-row mt-auto space-x-2">
           {tags.map((elem) => {
             return (
@@ -45,8 +66,13 @@ const HorizontalCard = (props: any) => {
             );
           })}
         </div>
-        <div className="w-fit mt-2" onClick={handleDelete}>
-          <AiOutlineDelete className="text-xl" />
+        <div className="flex gap-x-2">
+          <div className="w-fit mt-2" onClick={handleDelete}>
+            <AiOutlineDelete className="text-xl" />
+          </div>
+          <div className="w-fit mt-2" onClick={handleEdit}>
+            <FiEdit className="text-xl" />
+          </div>
         </div>
       </div>
     </div>

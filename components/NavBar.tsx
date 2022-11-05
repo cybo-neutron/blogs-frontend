@@ -32,20 +32,9 @@ function NavBar() {
         <Link href="/" className=" ">
           home
         </Link>
-        <Link href="/about" className="">
-          about
-        </Link>
-        <Link href="/skills" className="">
-          skills
-        </Link>
-        <Link href="/experience" className="">
-          experience
-        </Link>
-        <Link href="/blog" className="">
-          blog
-        </Link>
-        <Link href="/contact" className="">
-          contact
+
+        <Link href="/blogs" className="">
+          blogs
         </Link>
       </div>
     </div>

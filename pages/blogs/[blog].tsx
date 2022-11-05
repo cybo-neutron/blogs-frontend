@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import React from "react";
 import NavBar from "../../components/NavBar";
 import { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import BlogPreview from "../../components/BlogPreview";
 
 function Blog(props) {
   const [blogData, setBlogData] = useState({
@@ -35,10 +37,11 @@ function Blog(props) {
   return (
     <>
       <NavBar />
-      <div className="p-5">
-        <h1 className="text-3xl font-bold mb-3">{blogData.title}</h1>
-
-        <p>{blogData.description}</p>
+      <div className=" p-5 ">
+        <BlogPreview
+          title={blogData.title}
+          description={blogData.description}
+        />
       </div>
     </>
   );
