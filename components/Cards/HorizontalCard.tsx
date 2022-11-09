@@ -13,7 +13,7 @@ const HorizontalCard = (props: any) => {
   const { tags, id } = props;
   const router = useRouter();
 
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state: any) => state.auth);
 
   async function handleDelete(event: React.MouseEvent) {
     event.preventDefault();

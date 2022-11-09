@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 
-function UpdateBlog(props) {
+function UpdateBlog(props: any) {
   const [blogDetails, setBlogDetails] = useState({
     title: "",
     tags: [""],

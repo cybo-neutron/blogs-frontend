@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import blogService from "../../services/blogService";
 const Layout = dynamic(() => import("../../components/Layout"), { ssr: false });
 
-function Blog(props) {
+function Blog(props: any) {
   const [blogData, setBlogData] = useState({
     title: "",
     description: "",

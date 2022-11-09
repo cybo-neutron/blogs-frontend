@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { AnyAction, AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Router  from "next/router";
 import authService from "../services/authService";
 
@@ -13,14 +13,14 @@ if(typeof window !== 'undefined')
 }
 
 //register
-export const register = createAsyncThunk('auth/register',async(userData,thunkAPI)=>{
+export const register = createAsyncThunk('auth/register',async(userData:{name:string,email:string,password:string},thunkAPI)=>{
     console.log(userData)
     try{
         const response = await authService.register(userData);
         console.log("🚀 ~ file: user.slice.ts ~ line 16 ~ register ~ response", response)
         Router.push('/');
         return response;
-    }catch(err){
+    }catch(err:any){
         const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
         return thunkAPI.rejectWithValue(message);
     }
@@ -35,7 +35,7 @@ export const login = createAsyncThunk('auth/login',async(userData:{email:string,
         console.log("🚀 ~ file: user.slice.ts ~ line 30 ~ login ~ response", response)
         Router.push('/');
         return response;
-    }catch(err){
+    }catch(err : any){
         const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
         return thunkAPI.rejectWithValue(message);
     }

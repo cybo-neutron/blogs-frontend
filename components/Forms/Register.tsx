@@ -5,10 +5,11 @@ import { EyeSlashIcon, EyeIcon, UserIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../../states/user.slice";
+import store from "../../store";
 
 function Register() {
-  const { loggedIn, user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const { loggedIn, user } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch<typeof store.dispatch>();
 
   const [showPassword, setShowPassword] = useState(false);
   function togglePassword() {
@@ -22,11 +23,11 @@ function Register() {
     password2: "password",
   });
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function onSubmit(e) {
+  function onSubmit(e: React.MouseEvent) {
     e.preventDefault();
     dispatch(
       register({

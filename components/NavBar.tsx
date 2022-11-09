@@ -6,7 +6,7 @@ import { logout } from "../states/user.slice";
 import Router from "next/router";
 
 function NavBar() {
-  const { loggedIn, user } = useSelector((state) => state.auth);
+  const { loggedIn, user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
 
   const [menuOpen, setmenuOpen] = useState(false);

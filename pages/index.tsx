@@ -1,22 +1,18 @@
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import HorizontalCard from "../components/Cards/HorizontalCard";
-import ProfileCard from "../components/Cards/ProfileCard";
-import HeroComp from "../components/HeroComp";
-import NavBar from "../components/NavBar";
-import styles from "../styles/Home.module.css";
 import { useQuery } from "react-query";
 import axios from "axios";
 import LoadingBar from "../components/misc/LoadingBar";
 import Link from "next/link";
 
 import dynamic from "next/dynamic";
+import blogService from "../services/blogService";
 const Layout = dynamic(() => import("../components/Layout"), { ssr: false });
 
 const Home: NextPage = (props) => {
   async function fetchAllPublicPosts() {
-    const response = await axios.get(`http://localhost:5000/api/posts`);
+    const response = await blogService.fetchAllPublicBlogs();
 
     return response.data;
   }
@@ -43,7 +39,7 @@ const Home: NextPage = (props) => {
       </Head>
 
       <Layout>
-        {data.map((elem) => {
+        {data.map((elem: any) => {
           return (
             <Link
               href={{

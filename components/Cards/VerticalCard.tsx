@@ -1,6 +1,6 @@
 import React from "react";
 
-function VerticalCard(props) {
+function VerticalCard(props: any) {
   return (
     <div
       className="bg-zinc-800 shadow-md shadow-black"

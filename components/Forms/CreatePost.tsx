@@ -4,7 +4,7 @@ import Router, { useRouter } from "next/router";
 import BlogPreview from "../BlogPreview";
 import blogService from "../../services/blogService";
 
-function CreatePost(props) {
+function CreatePost(props: any) {
   const router = useRouter();
   const initialValue = props.initialValue;
   const [blogDetails, setBlogDetails] = useState({
@@ -27,7 +27,9 @@ function CreatePost(props) {
   //   });
   // }
 
-  function handleChange(e) {
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
     setBlogDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 

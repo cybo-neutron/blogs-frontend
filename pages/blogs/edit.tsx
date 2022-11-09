@@ -1,8 +1,6 @@
-import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { useSelector } from "react-redux";
+import { useQuery, QueryFunctionContext } from "react-query";
 import Layout from "../../components/Layout";
 import LoadingBar from "../../components/misc/LoadingBar";
 import blogService from "../../services/blogService";
@@ -19,11 +17,15 @@ function Edit() {
     isPublic: false,
     image: "",
   });
-  function handleChange(e) {
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
     setBlogData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  async function fetchPost({ queryKey }) {
+  async function fetchPost({
+    queryKey,
+  }: QueryFunctionContext<[string, string]>) {
     const response = await blogService.fetchBlog(queryKey[1]);
     const { title, description, isPublic, tags } = response.data;
     setBlogData((prev) => ({ ...prev, title, description, isPublic, tags }));
@@ -55,10 +57,7 @@ function Edit() {
     }
   }, [router.isReady]);
 
-  const { isLoading, status, data } = useQuery(
-    ["fetchBlog", blogId],
-    fetchPost
-  );
+  const { isLoading, data } = useQuery(["fetchBlog", blogId], fetchPost);
 
   if (isLoading) {
     return <LoadingBar />;

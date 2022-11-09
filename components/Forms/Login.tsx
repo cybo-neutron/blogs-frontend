@@ -5,10 +5,11 @@ import Head from "next/head";
 import { login } from "../../states/user.slice";
 import { useSelector, useDispatch } from "react-redux";
 import Router from "next/router";
+import store from "../../store";
 
-function Login(props) {
+function Login(props: any) {
   const { loggedIn, user } = useSelector((state: any) => state.auth);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<typeof store.dispatch>();
 
   const [showPassword, setShowPassword] = useState(false);
   function togglePassword() {
@@ -20,11 +21,11 @@ function Login(props) {
     password: "password",
   });
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  async function onSubmit(e) {
+  async function onSubmit(e: React.MouseEvent) {
     e.preventDefault();
     console.log("logging In");
     dispatch(login(userData));

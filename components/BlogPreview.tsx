@@ -6,7 +6,7 @@ interface blogProps {
   description: string;
 }
 
-function BlogPreview(props) {
+function BlogPreview(props: any) {
   const { title, description, image } = props;
   return (
     <div className="prose lg:prose-xl min-w-full">

@@ -3,7 +3,7 @@ import Router  from "next/router";
 
 const API_URL = "https://blogs-backend.onrender.com/api/posts";
 
-const createBlog = async(token:string,blog,user_id:string)=>{
+const createBlog = async(token:string,blog:any,user_id:string)=>{
     const config = {
         headers:{
             Authorization:`Bearer ${token}`
@@ -39,7 +39,7 @@ const fetchAllBlogsOfUser = async(token:string,user_id:string)=>{
     return axios.get(`${API_URL}/myBlogs`,config);
 }
 
-const updateBlog = async(token:string,blogId:string,blogData)=>{
+const updateBlog = async(token:string,blogId:string,blogData:any)=>{
     console.log({token,blogId,blogData});
     
     const config = {
