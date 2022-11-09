@@ -1,18 +1,29 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../states/user.slice";
+import Router from "next/router";
 
 function NavBar() {
+  const { loggedIn, user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const [menuOpen, setmenuOpen] = useState(false);
   function toggleMenu() {
     setmenuOpen((prev) => !prev);
+  }
+
+  function onLogout() {
+    dispatch(logout());
+    Router.push("/");
   }
 
   return (
     <div className="flex flex-col sm:flex-row justify-between px-2 py-2 shadow-md bg-transparent">
       <div className="font-bold flex justify-between">
         <div>
-          <Link href="/blogs">Logo</Link>
+          <Link href="/">Logo</Link>
         </div>
         <div className="visible sm:hidden cursor-pointer" onClick={toggleMenu}>
           {menuOpen ? (
@@ -29,13 +40,29 @@ function NavBar() {
                     flex-col space-y-2 space-x-0 justify-center items-center
                     sm:flex-row sm:space-y-0 sm:space-x-2 `}
       >
-        <Link href="/" className=" ">
-          home
-        </Link>
+        {user ? (
+          <>
+            <Link href="/blogs" className="">
+              my blogs
+            </Link>
+            <button className="bg-orange-400 font-semibold px-2  rounded-sm mx-2 my-4">
+              <Link href="/blogs/create">Compose new Blog</Link>
+            </button>
 
-        <Link href="/blogs" className="">
-          blogs
-        </Link>
+            <button
+              className="bg-red-500 px-2 rounded-sm shadow-sm"
+              onClick={onLogout}
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link href="/user/login">
+            <button className="bg-orange-400 px-3 rounded-md shadow-lg">
+              Login
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

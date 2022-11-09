@@ -25,7 +25,6 @@ function UpdateBlog(props) {
   }
 
   async function onUpdate() {
-    // console.log(blogDetails);
     setBlogDetails((prev) => {
       return { ...prev, isPublic: true };
     });

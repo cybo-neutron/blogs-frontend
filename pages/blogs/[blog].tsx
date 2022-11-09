@@ -6,43 +6,50 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import BlogPreview from "../../components/BlogPreview";
 
+import dynamic from "next/dynamic";
+import blogService from "../../services/blogService";
+const Layout = dynamic(() => import("../../components/Layout"), { ssr: false });
+
 function Blog(props) {
   const [blogData, setBlogData] = useState({
     title: "",
     description: "",
     author: "",
     tags: [],
+    image: "",
   });
 
   const router = useRouter();
 
   useEffect(() => {
-    const id = router.query.blog;
-    console.log({ id });
-    (async () => {
-      const res = await fetch(`http://localhost:5000/api/posts/${id}`, {
-        method: "GET",
-      });
-      const data = await res.json();
-      setBlogData((prev) => ({
-        ...prev,
-        title: data.title,
-        description: data.description,
-        author: data.author,
-        tags: data.tags,
-      }));
-    })();
+    const id: string = router.query.blog;
+    if (id) {
+      (async () => {
+        const res = await blogService.fetchBlog(id);
+        const data = res.data;
+        setBlogData((prev) => ({
+          ...prev,
+          title: data.title,
+          description: data.description,
+          author: data.author,
+          tags: data.tags,
+          image: data.image,
+        }));
+      })();
+    }
   }, [router.query.blog]);
 
   return (
     <>
-      <NavBar />
-      <div className=" p-5 ">
-        <BlogPreview
-          title={blogData.title}
-          description={blogData.description}
-        />
-      </div>
+      <Layout>
+        <div className=" p-5 bg-slate-400 w-10/12 self-center">
+          <BlogPreview
+            title={blogData.title}
+            description={blogData.description}
+            image={blogData.image}
+          />
+        </div>
+      </Layout>
     </>
   );
 }

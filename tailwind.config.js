@@ -17,6 +17,9 @@ module.exports = {
         },
       }),
     },
+    fontFamily: {
+      custom: ["ubuntu-mono", "Ubuntu", "sans-serif", "Josefin Sans"],
+    },
   },
   plugins: [
     require("@tailwindcss/line-clamp"),

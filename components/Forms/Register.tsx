@@ -1,15 +1,48 @@
 import React, { useState } from "react";
+import Head from "next/head";
 
 import { EyeSlashIcon, EyeIcon, UserIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import { register } from "../../states/user.slice";
 
-function Register(props) {
+function Register() {
+  const { loggedIn, user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const [showPassword, setShowPassword] = useState(false);
   function togglePassword() {
     setShowPassword((prev) => !prev);
   }
 
+  const [userData, setUserData] = useState({
+    name: "John Doe",
+    email: "johndoe@email.com",
+    password: "password",
+    password2: "password",
+  });
+
+  function handleChange(e) {
+    setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    dispatch(
+      register({
+        name: userData.name,
+        email: userData.email,
+        password: userData.password,
+      })
+    );
+  }
+
   return (
     <div className="w-full h-4/5 px-2 flex flex-col justify-center items-center text-zinc-300 ">
+      <Head>
+        <title>Register</title>
+      </Head>
+
       <div className="text-3xl font-extrabold text-zinc-200">
         <UserIcon className="h-12" />
       </div>
@@ -23,7 +56,8 @@ function Register(props) {
             type="text"
             name="name"
             className="bg-transparent border-b-[1px] border-zinc-500 text-zinc-300 outline-none "
-            defaultValue={"John Doe"}
+            defaultValue={userData.name}
+            onChange={handleChange}
           />
         </div>
 
@@ -33,7 +67,8 @@ function Register(props) {
             type="text"
             name="email"
             className="bg-transparent border-b-[1px] border-zinc-500 text-zinc-300 outline-none "
-            defaultValue={"johndoe@email.com"}
+            defaultValue={userData.email}
+            onChange={handleChange}
           />
         </div>
 
@@ -43,7 +78,8 @@ function Register(props) {
             type={showPassword ? "text" : "password"}
             name="password"
             className="bg-transparent border-b-[1px] border-zinc-500 text-zinc-300 outline-none"
-            defaultValue={"password"}
+            defaultValue={userData.password}
+            onChange={handleChange}
           />
           <div
             onClick={togglePassword}
@@ -61,9 +97,10 @@ function Register(props) {
           <p className="text-[0.8em] text-zinc-400">Confirm Password</p>
           <input
             type={showPassword ? "text" : "password"}
-            name="confirm_password"
+            name="password2"
             className="bg-transparent border-b-[1px] border-zinc-500 text-zinc-300 outline-none"
-            defaultValue={"password"}
+            defaultValue={userData.password2}
+            onChange={handleChange}
           />
           <div
             onClick={togglePassword}
@@ -77,7 +114,10 @@ function Register(props) {
           </div>
         </div>
 
-        <button className="bg-zinc-200 text-zinc-900 rounded-full py-1 hover:bg-zinc-300 w-1/2 self-center mt-4">
+        <button
+          className="bg-zinc-200 text-zinc-900 rounded-full py-1 hover:bg-zinc-300 w-1/2 self-center mt-4"
+          onClick={onSubmit}
+        >
           Sign up
         </button>
       </form>
@@ -85,12 +125,11 @@ function Register(props) {
       <hr className="w-3/5 mt-auto border-zinc-500" />
       <div className="mt-2 text-sm">
         Already have an account ? {"  "}
-        <span
-          className="text-zinc-200 border-b-2 border-zinc-400 cursor-pointer "
-          onClick={props.toggleLoginRegister}
-        >
-          Login
-        </span>{" "}
+        <Link href="/user/login">
+          <a className="text-zinc-200 border-b-2 border-zinc-400 cursor-pointer ">
+            Login
+          </a>
+        </Link>{" "}
       </div>
     </div>
   );

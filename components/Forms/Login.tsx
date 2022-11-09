@@ -1,15 +1,40 @@
 import React, { useState } from "react";
-
 import { EyeSlashIcon, EyeIcon, UserIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
+import Head from "next/head";
+import { login } from "../../states/user.slice";
+import { useSelector, useDispatch } from "react-redux";
+import Router from "next/router";
 
 function Login(props) {
+  const { loggedIn, user } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
+
   const [showPassword, setShowPassword] = useState(false);
   function togglePassword() {
     setShowPassword((prev) => !prev);
   }
 
+  const [userData, setUserData] = useState({
+    email: "johndoe@email.com",
+    password: "password",
+  });
+
+  function handleChange(e) {
+    setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    console.log("logging In");
+    dispatch(login(userData));
+  }
+
   return (
     <div className="w-full h-4/5 px-2 flex flex-col justify-center items-center text-zinc-300 ">
+      <Head>
+        <title>Login</title>
+      </Head>
       <div className="text-3xl font-extrabold text-zinc-200">
         <UserIcon className="h-12" />
       </div>
@@ -23,7 +48,8 @@ function Login(props) {
             type="text"
             name="email"
             className="bg-transparent border-b-[1px] border-zinc-500 text-zinc-300 outline-none "
-            defaultValue={"johndoe@email.com"}
+            defaultValue={userData.email}
+            onChange={handleChange}
           />
         </div>
 
@@ -33,7 +59,8 @@ function Login(props) {
             type={showPassword ? "text" : "password"}
             name="password"
             className="bg-transparent border-b-[1px] border-zinc-500 text-zinc-300 outline-none"
-            defaultValue={"password"}
+            defaultValue={userData.password}
+            onChange={handleChange}
           />
           <div
             onClick={togglePassword}
@@ -51,20 +78,22 @@ function Login(props) {
           Forgot Password?
         </a>
 
-        <button className="bg-zinc-200 text-zinc-900 rounded-full py-1 hover:bg-zinc-300 w-1/2 self-center mt-4">
+        <button
+          className="bg-zinc-200 text-zinc-900 rounded-full py-1 hover:bg-zinc-300 w-1/2 self-center mt-4"
+          onClick={onSubmit}
+        >
           Sign in
         </button>
       </form>
 
       <hr className="w-3/5 mt-auto border-zinc-500" />
       <div className="mt-2 text-sm">
-        Don't Have an Account ? {"  "}
-        <span
-          className="text-zinc-200 border-b-2 border-zinc-400 cursor-pointer"
-          onClick={props.toggleLoginRegister}
-        >
-          Create Account
-        </span>{" "}
+        Don't Have an Account ?
+        <Link href="/user/register">
+          <a className="text-zinc-200 border-zinc-400 cursor-pointer border-b-2">
+            Create Account
+          </a>
+        </Link>
       </div>
     </div>
   );

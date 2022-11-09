@@ -2,8 +2,10 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import { useSelector } from "react-redux";
 import Layout from "../../components/Layout";
 import LoadingBar from "../../components/misc/LoadingBar";
+import blogService from "../../services/blogService";
 
 function edit() {
   const router = useRouter();
@@ -15,30 +17,31 @@ function edit() {
     userId: "",
     tags: [],
     isPublic: false,
+    image: "",
   });
   function handleChange(e) {
     setBlogData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
   async function fetchPost({ queryKey }) {
-    const response = await axios.get(
-      `http://localhost:5000/api/posts/${queryKey[1]}`
-    );
+    const response = await blogService.fetchBlog(queryKey[1]);
     const { title, description, isPublic, tags } = response.data;
     setBlogData((prev) => ({ ...prev, title, description, isPublic, tags }));
     return response.data;
   }
 
   async function updatePost() {
-    console.log("Updating post");
-    const response = await axios.patch(
-      `http://localhost:5000/api/posts/${blogId}`,
-      {
-        ...blogData,
-      }
-    );
-    console.log(blogData);
-    console.log(response.data);
+    const user = localStorage.getItem("user");
+    if (user) {
+      const json = JSON.parse(user);
+      const response = await blogService.updateBlog(
+        json.token,
+        blogId,
+        blogData
+      );
+
+      router.push("/blogs");
+    }
   }
 
   function deletePost() {
@@ -63,13 +66,21 @@ function edit() {
 
   return (
     <Layout>
-      <div className="flex flex-col gap-y-3 mx-4 mt-3 rounded-md p-2 bg-zinc-700 bg-opacity-20 ">
+      <div className="flex flex-col gap-y-3 mt-3 rounded-md p-4 bg-zinc-700 bg-opacity-20 ">
         <input
           type="text"
           name="title"
           className="bg-transparent border-0 outline-none w-full text-3xl font-bold"
           placeholder="New post title..."
           defaultValue={data.title}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="image"
+          className="bg-transparent border-0 outline-none w-full text-md"
+          placeholder="Insert your image link here.."
+          defaultValue={data.image}
           onChange={handleChange}
         />
         <textarea
