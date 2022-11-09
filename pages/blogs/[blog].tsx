@@ -22,7 +22,7 @@ function Blog(props: any) {
   const router = useRouter();
 
   useEffect(() => {
-    const id: string = router.query.blog;
+    const id: any = router.query.blog;
     if (id) {
       (async () => {
         const res = await blogService.fetchBlog(id);

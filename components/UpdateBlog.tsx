@@ -20,7 +20,9 @@ function UpdateBlog(props: any) {
     });
   }
 
-  function handleChange(e) {
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
     setBlogDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 

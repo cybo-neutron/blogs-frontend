@@ -4,10 +4,11 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../states/user.slice";
 import Router from "next/router";
+import store from "../store";
 
 function NavBar() {
   const { loggedIn, user } = useSelector((state: any) => state.auth);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<typeof store.dispatch>();
 
   const [menuOpen, setmenuOpen] = useState(false);
   function toggleMenu() {
