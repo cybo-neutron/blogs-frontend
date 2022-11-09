@@ -7,7 +7,7 @@ import Layout from "../../components/Layout";
 import LoadingBar from "../../components/misc/LoadingBar";
 import blogService from "../../services/blogService";
 
-function edit() {
+function Edit() {
   const router = useRouter();
 
   const [blogId, setBlogId] = useState("");
@@ -100,7 +100,7 @@ function edit() {
               Public
             </label>
             <input
-              className="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-white bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm"
+              className="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top  bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm"
               type="checkbox"
               role="switch"
               id="flexSwitchCheckDefault"
@@ -131,4 +131,4 @@ function edit() {
   );
 }
 
-export default edit;
+export default Edit;

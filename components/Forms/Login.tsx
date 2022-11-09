@@ -88,7 +88,7 @@ function Login(props) {
 
       <hr className="w-3/5 mt-auto border-zinc-500" />
       <div className="mt-2 text-sm">
-        Don't Have an Account ?
+        Dont Have an Account ?
         <Link href="/user/register">
           <a className="text-zinc-200 border-zinc-400 cursor-pointer border-b-2">
             Create Account

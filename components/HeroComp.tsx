@@ -24,6 +24,7 @@ function HeroComp() {
               src={elem.img}
               alt=""
               className="object-cover h-[200px] md:h-[300px]"
+              key={elem.img}
             />
           );
         })}
