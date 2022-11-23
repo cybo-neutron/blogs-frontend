@@ -42,7 +42,7 @@ function Blog(props: any) {
   return (
     <>
       <Layout>
-        <div className=" p-5 bg-slate-400 w-10/12 self-center">
+        <div className=" p-5 bg-zinc-800 w-full self-center">
           <BlogPreview
             title={blogData.title}
             description={blogData.description}

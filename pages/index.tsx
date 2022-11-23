@@ -8,6 +8,7 @@ import Link from "next/link";
 
 import dynamic from "next/dynamic";
 import blogService from "../services/blogService";
+import VerticalCard from "../components/Cards/VerticalCard";
 const Layout = dynamic(() => import("../components/Layout"), { ssr: false });
 
 const Home: NextPage = (props) => {
@@ -39,17 +40,18 @@ const Home: NextPage = (props) => {
       </Head>
 
       <Layout>
-        {data.map((elem: any) => {
-          return (
-            <Link
-              href={{
-                pathname: `/blogs/${elem._id}`,
-              }}
-              passHref
-              key={elem._id}
-            >
-              <a key={elem._id}>
-                <HorizontalCard
+        <div className="grid grid-cols-2 gap-4">
+          {data.map((elem: any) => {
+            return (
+              <Link
+                href={{
+                  pathname: `/blogs/${elem._id}`,
+                }}
+                passHref
+                key={elem._id}
+              >
+                <a key={elem._id}>
+                  {/* <HorizontalCard
                   key={elem._id}
                   id={elem._id}
                   author={elem.author}
@@ -58,11 +60,22 @@ const Home: NextPage = (props) => {
                   description={elem.description}
                   authorUserId={elem.user_id}
                   image={elem.image}
-                />
-              </a>
-            </Link>
-          );
-        })}
+                /> */}
+                  <VerticalCard
+                    key={elem._id}
+                    id={elem._id}
+                    author={elem.author}
+                    title={elem.title}
+                    tags={elem.tags}
+                    description={elem.description}
+                    authorUserId={elem.user_id}
+                    image={elem.image}
+                  />
+                </a>
+              </Link>
+            );
+          })}
+        </div>
       </Layout>
     </div>
   );

@@ -24,7 +24,9 @@ function NavBar() {
     <div className="flex flex-col sm:flex-row justify-between px-2 py-2 shadow-md bg-transparent">
       <div className="font-bold flex justify-between">
         <div>
-          <Link href="/">Logo</Link>
+          <Link href="/">
+            <div className="text-orange-500 cursor-pointer">DBlog</div>
+          </Link>
         </div>
         <div className="visible sm:hidden cursor-pointer" onClick={toggleMenu}>
           {menuOpen ? (
@@ -46,7 +48,7 @@ function NavBar() {
             <Link href="/blogs" className="">
               my blogs
             </Link>
-            <button className="bg-orange-400 font-semibold px-2  rounded-sm mx-2 my-4">
+            <button className="bg-orange-500 font-semibold px-2  rounded-sm mx-2 my-4">
               <Link href="/blogs/create">Compose new Blog</Link>
             </button>
 
