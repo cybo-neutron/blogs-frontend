@@ -21,7 +21,7 @@ function NavBar() {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row justify-between px-2 py-2 shadow-md bg-transparent">
+    <div className="flex flex-col sm:flex-row justify-between px-2 py-2 shadow-md bg-zinc-800 z-10 fixed w-screen">
       <div className="font-bold flex justify-between">
         <div>
           <Link href="/">
