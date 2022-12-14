@@ -21,11 +21,16 @@ function NavBar() {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row justify-between px-2 py-2 shadow-md bg-zinc-800 z-10 w-screen">
+    <div className="flex flex-col sm:flex-row justify-between px-10 py-2  bg-zinc-800 z-10 w-screen shadow-lg shadow-zinc-900 mb-4">
       <div className="font-bold flex justify-between">
         <div>
           <Link href="/">
-            <div className="text-orange-500 cursor-pointer">DBlog</div>
+            <div className="cursor-pointer text-2xl font-extralight">
+              D
+              <span className="text-orange-500 font-extrabold drop-shadow-xl shadow-white">
+                Blog
+              </span>
+            </div>
           </Link>
         </div>
         <div className="visible sm:hidden cursor-pointer" onClick={toggleMenu}>
@@ -48,12 +53,12 @@ function NavBar() {
             <Link href="/blogs" className="">
               my blogs
             </Link>
-            <button className="bg-orange-500 font-semibold px-2  rounded-sm mx-2 my-4">
+            <button className="bg-orange-600 font-bold px-2  rounded-sm mx-2 my-4">
               <Link href="/blogs/create">Compose new Blog</Link>
             </button>
 
             <button
-              className="bg-red-500 px-2 rounded-sm shadow-sm"
+              className="bg-red-600 px-2 rounded-sm shadow-sm"
               onClick={onLogout}
             >
               Logout
@@ -61,7 +66,7 @@ function NavBar() {
           </>
         ) : (
           <Link href="/user/login">
-            <button className="bg-orange-400 px-3 rounded-md shadow-lg">
+            <button className="bg-orange-600 px-3 rounded-md shadow-lg">
               Login
             </button>
           </Link>

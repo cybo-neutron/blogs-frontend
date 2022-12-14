@@ -19,6 +19,8 @@ function CreatePost(props: any) {
   const [canPublish, setCanPublish] = useState(false);
   const [token, setToken] = useState("");
 
+  const [preview, setPreview] = useState(false);
+
   //todo : Implement display tags
   // function displayTags() {
   //   let tags = ["programming", "game", "unity", "javascript"];
@@ -64,25 +66,40 @@ function CreatePost(props: any) {
     blogService.createBlog(token, blogDetails, blogDetails.user_id);
   }
 
+  function togglePreview() {
+    setPreview((prev) => !prev);
+  }
+
   return (
-    <div className="flex flex-col gap-y-3 mx-4 mt-3 rounded-md p-2 bg-zinc-700 bg-opacity-20 ">
-      <input
-        type="text"
-        name="title"
-        className="bg-transparent border-0 outline-none w-full text-3xl font-bold"
-        placeholder="New post title..."
-        onChange={handleChange}
-      />
+    <div className="flex flex-col mx-4 mt-3 rounded-md p-4 bg-zinc-700 bg-opacity-20 mb-10 w-9/12 self-center">
+      <button
+        onClick={togglePreview}
+        className="self-end text-xl hover:shadow-xl > bg-zinc-700 px-4 rounded-md "
+      >
+        {preview ? "Edit" : "Preview"}
+      </button>
 
-      <input
-        type="text"
-        name="image"
-        className="bg-transparent border-0 outline-none font-light"
-        placeholder="Mention the link of the image for cover..."
-        onChange={handleChange}
-      />
+      {!preview && (
+        <div className="flex flex-col gap-y-3">
+          <input
+            type="text"
+            name="title"
+            className="bg-transparent border-0 outline-none w-full text-3xl font-bold"
+            placeholder="New post title..."
+            onChange={handleChange}
+            value={blogDetails.title}
+          />
 
-      {/* <input
+          <input
+            type="text"
+            name="image"
+            className="bg-transparent border-0 outline-none font-light"
+            placeholder="Mention the link of the image for cover..."
+            onChange={handleChange}
+            value={blogDetails.image}
+          />
+
+          {/* <input
         type="text"
         name="tags"
         className="bg-transparent border-0 outline-none font-light"
@@ -91,36 +108,49 @@ function CreatePost(props: any) {
           setBlogDetails((prev) => ({ ...prev, tags: [e.target.value] }));
         }}
       /> */}
-      {/* {displayTags()} */}
-      <textarea
-        name="description"
-        className="outline-none h-[400px] bg-zinc-600 bg-opacity-5 py-1 resize-none"
-        placeholder="Enter the contents of your blog here..."
-        onChange={handleChange}
-      />
-      <div>
+          {/* {displayTags()} */}
+          <textarea
+            name="description"
+            className="outline-none h-[400px] bg-zinc-600 bg-opacity-5 py-1 resize-none"
+            placeholder="Enter the contents of your blog here..."
+            onChange={handleChange}
+            value={blogDetails.description}
+          />
+        </div>
+      )}
+
+      {/* Preview  */}
+      {preview && (
+        <div>
+          <div className="font-bold text-3xl text-center text-orange-300">
+            Preview
+          </div>
+
+          <BlogPreview
+            title={blogDetails.title}
+            description={blogDetails.description}
+            image={blogDetails.image}
+          />
+        </div>
+      )}
+
+      {/* Buttons  */}
+      <div className="mt-5">
         <button
-          className="bg-orange-500 px-3 py-1 rounded-full font-bold"
+          className="bg-orange-600 px-3 py-1 rounded-full font-bold"
           onClick={onPublish}
         >
           Publish
         </button>
         <button
-          className="text-orange-400  ml-2 px-3 py-1 rounded-full"
+          className="text-orange-400  ml-2 px-3 py-1 rounded-full hover:shadow-xl"
           onClick={onSaveDraft}
         >
           Save Draft
         </button>
       </div>
-      <hr />
-      <div className="font-bold text-xl text-center text-orange-300">
-        Preview
-      </div>
-      <BlogPreview
-        title={blogDetails.title}
-        description={blogDetails.description}
-        image={blogDetails.image}
-      />
+
+      {/* <hr /> */}
     </div>
   );
 }

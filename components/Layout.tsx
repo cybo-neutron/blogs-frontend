@@ -6,7 +6,7 @@ function Layout(props: any) {
   return (
     <>
       <NavBar />
-      <div className="flex flex-col mx-20">{props.children}</div>
+      <div className="flex flex-col px-20 mb-20">{props.children}</div>
       {/* <Footer /> */}
     </>
   );

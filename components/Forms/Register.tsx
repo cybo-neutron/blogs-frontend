@@ -48,7 +48,13 @@ function Register() {
         <UserIcon className="h-12" />
       </div>
       <p className="text-zinc-300 font-semibold mt-10 text-lg">
-        Welcome to company
+        Welcome to{" "}
+        <span className="cursor-pointer text-xl font-extralight">
+          D
+          <span className="text-orange-500 font-extrabold drop-shadow-xl shadow-white">
+            Blog
+          </span>
+        </span>
       </p>
       <form action="" className="flex flex-col gap-y-2 w-4/5 mt-6">
         <div className="w-full flex flex-col">
