@@ -3,12 +3,15 @@ import Router  from "next/router";
 import authService from "../services/authService";
 
 
-//Get user from lodal storage
+//Get user from local storage
 let user = null;
 if(typeof window !== 'undefined')
 {
     user = localStorage.getItem('user');
-    console.log("🚀 ~ file: user.slice.ts ~ line 9 ~ user", user)
+    if (user) {
+        user = JSON.parse(user);
+    }
+    // console.log("🚀 ~ file: user.slice.ts ~ line 9 ~ user", user)
     
 }
 

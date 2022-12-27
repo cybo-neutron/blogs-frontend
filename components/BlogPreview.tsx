@@ -1,6 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-
+// import style from "./markdown.module.css";
 interface blogProps {
   title: string;
   description: string;
@@ -14,7 +14,7 @@ function BlogPreview(props: any) {
       <div className=" w-full flex justify-center">
         <img src={image || "/scenery1.jpg"} alt="" className="max-h-[400px]" />
       </div>
-      <ReactMarkdown>{description}</ReactMarkdown>
+      <ReactMarkdown className="markdown">{description}</ReactMarkdown>
     </div>
   );
 }

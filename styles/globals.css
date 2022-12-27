@@ -11,7 +11,11 @@
     }
     ::-webkit-scrollbar{
         width: 5px;
+    
         background-color: transparent;
+    }
+    ::-webkit-scrollbar:horizontal{
+        height: 5px;
     }
 
     ::-webkit-scrollbar-track {
@@ -24,6 +28,9 @@
         border-radius: 10px;
       }
 
+      .markdown code{
+        background-color: rgb(193, 177, 166);
+      }
 }
 
 @layer base{

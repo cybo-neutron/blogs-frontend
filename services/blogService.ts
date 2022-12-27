@@ -50,7 +50,8 @@ const updateBlog = async(token:string,blogId:string,blogData:any)=>{
     return  axios.patch(`${API_URL}/${blogId}`,blogData,config);
 }
 
-const deleteBlog = async(token:string,blogId:string)=>{
+const deleteBlog = async (token: string, blogId: string) => {
+    console.log({token});
     const config = {
         headers:{
             Authorization:`Bearer ${token}`

@@ -24,7 +24,7 @@ export default function Blogs(props: any) {
           jsonUser.token,
           jsonUser.user_id
         );
-        console.log("🚀 ~ file: index.tsx ~ line 26 ~ allBlogs", allBlogs.data);
+        // console.log("🚀 ~ file: index.tsx ~ line 26 ~ allBlogs", allBlogs.data);
 
         setBlogs(allBlogs.data);
       }

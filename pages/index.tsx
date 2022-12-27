@@ -51,16 +51,6 @@ const Home: NextPage = (props) => {
                 key={elem._id}
               >
                 <a key={elem._id}>
-                  {/* <HorizontalCard
-                  key={elem._id}
-                  id={elem._id}
-                  author={elem.author}
-                  title={elem.title}
-                  tags={elem.tags}
-                  description={elem.description}
-                  authorUserId={elem.user_id}
-                  image={elem.image}
-                /> */}
                   <VerticalCard
                     key={elem._id}
                     id={elem._id}

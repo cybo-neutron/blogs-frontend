@@ -14,14 +14,18 @@ const HorizontalCard = (props: any) => {
   const router = useRouter();
 
   const { user } = useSelector((state: any) => state.auth);
+  // console.log(props);
 
   async function handleDelete(event: React.MouseEvent) {
     event.preventDefault();
     const confirmDelete = window.confirm("Are you sure you want to delete it?");
 
     if (confirmDelete) {
+      // console.log(user.token);
       const response = await blogService.deleteBlog(user.token, id);
-      router.push("/");
+
+      router.push("/blogs");
+      router.reload();
     }
   }
 
@@ -34,13 +38,9 @@ const HorizontalCard = (props: any) => {
       },
     });
   }
-  // console.log(props.isPublic);
 
   return (
-    <div
-      className="flex overflow-hidden bg-transparent my-2 rounded-md cursor-pointer shadow-xl w-full"
-      // key={props.id}
-    >
+    <div className="flex overflow-hidden bg-transparent my-2 rounded-md cursor-pointer shadow-xl w-full">
       {/* Image */}
       <div className=" my-auto max-w-[250px] min-w-[200px] max-h-[200px] overflow-hidden hidden sm:flex ">
         <img
@@ -53,7 +53,7 @@ const HorizontalCard = (props: any) => {
       {/* Content */}
       <div className="flex flex-col py-2 mx-2 w-full relative">
         <p className="text-sm text-zinc-500">
-          {props.author || props?.authorUserId || "Anonymous"}
+          {props.author || props?.author || "Anonymous"}
         </p>
         <p className="absolute top-0 right-0 bg-orange-500 px-2 rounded-b-2xl">
           {props.isPublic !== "undefined" &&

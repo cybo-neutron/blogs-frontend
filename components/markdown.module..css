@@ -1,0 +1,5 @@
+.markdown code{
+    display: block;
+    white-space: pre-wrap;
+    background: rgb(80, 80, 175);
+}

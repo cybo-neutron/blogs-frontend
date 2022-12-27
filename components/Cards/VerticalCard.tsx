@@ -22,6 +22,7 @@ function VerticalCard(props: any) {
 
     if (confirmDelete) {
       const response = await blogService.deleteBlog(user.token, id);
+      console.log(response);
       router.push("/");
     }
   }

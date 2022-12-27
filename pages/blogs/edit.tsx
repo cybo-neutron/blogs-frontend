@@ -27,8 +27,15 @@ function Edit() {
     queryKey,
   }: QueryFunctionContext<[string, string]>) {
     const response = await blogService.fetchBlog(queryKey[1]);
-    const { title, description, isPublic, tags } = response.data;
-    setBlogData((prev) => ({ ...prev, title, description, isPublic, tags }));
+    const { title, description, isPublic, tags, image } = response.data;
+    setBlogData((prev) => ({
+      ...prev,
+      title,
+      description,
+      isPublic,
+      tags,
+      image,
+    }));
     return response.data;
   }
 
