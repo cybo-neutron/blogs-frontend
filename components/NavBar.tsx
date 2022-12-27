@@ -21,7 +21,7 @@ function NavBar() {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row justify-between px-10 py-2  bg-zinc-800 z-10 w-screen shadow-lg shadow-zinc-900 mb-4">
+    <div className="flex flex-col sm:flex-row justify-between px-10 py-2  bg-zinc-800 z-10 w-full shadow-lg shadow-zinc-900 mb-4 ">
       <div className="font-bold flex justify-between">
         <div>
           <Link href="/">
@@ -35,9 +35,9 @@ function NavBar() {
         </div>
         <div className="visible sm:hidden cursor-pointer" onClick={toggleMenu}>
           {menuOpen ? (
-            <XMarkIcon className="h-5 " />
+            <XMarkIcon className="h-7" />
           ) : (
-            <Bars3Icon className="h-5 " />
+            <Bars3Icon className="h-7 " />
           )}
         </div>
       </div>

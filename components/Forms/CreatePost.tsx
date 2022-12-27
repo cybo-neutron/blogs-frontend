@@ -71,7 +71,7 @@ function CreatePost(props: any) {
   }
 
   return (
-    <div className="flex flex-col mx-4 mt-3 rounded-md p-4 bg-zinc-700 bg-opacity-20 mb-10 w-9/12 self-center">
+    <div className="flex flex-col mx-4 mt-3 rounded-md p-4 bg-zinc-700 bg-opacity-20 mb-10 w-full self-center">
       <button
         onClick={togglePreview}
         className="self-end text-xl hover:shadow-xl > bg-zinc-700 px-4 rounded-md "

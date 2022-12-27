@@ -8,6 +8,7 @@ import style from "./HorizontalCard.module.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import blogService from "../../services/blogService";
+import Link from "next/link";
 
 function VerticalCard(props: any) {
   const { tags, id } = props;
